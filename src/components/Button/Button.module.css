@@ -1,3 +1,9 @@
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .button {
     padding: 8px 16px;
     border-radius: 2px;
