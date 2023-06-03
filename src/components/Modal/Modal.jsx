@@ -5,14 +5,14 @@ const modalRoot=document.querySelector('#modal-root')
 export class Modal extends Component {
 
 componentDidMount() {
-        window.addEventListener('keydown', this.hendleKeydown)
+        window.addEventListener('keydown', this.handleKeydown)
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', this.hendleKeydown)
+        window.removeEventListener('keydown', this.handleKeydown)
     }
     
-    hendleKeydown = (e) => {
+    handleKeydown = (e) => {
             if (e.code === "Escape") {
                 this.props.onClose()
                 console.log(e.code)
