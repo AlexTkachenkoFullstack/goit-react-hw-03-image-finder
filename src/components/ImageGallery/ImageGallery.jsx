@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import api from "services/images-api"
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
-import { Button } from "components/Button/Button";
+// import { Button } from "components/Button/Button";
 export class ImageGallery extends Component{
     state = {
         data: [],
