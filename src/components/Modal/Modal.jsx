@@ -30,7 +30,7 @@ componentDidMount() {
         return (createPortal
                 (<div className={css.overlay} onClick={this.handleBackdropClick}>
                     <div className={css.modal}>
-                        <img src={this.props.largeImage} alt="BigImage"/>
+                        <img src={this.props.largeImage} alt="BigImage" />
                     </div>
                 </div>,
                 modalRoot
