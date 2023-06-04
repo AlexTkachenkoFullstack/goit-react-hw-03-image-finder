@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import React, { Component } from "react";
 import css from './Modal.module.css'
+import PropTypes from 'prop-types';
 const modalRoot=document.querySelector('#modal-root')
 export class Modal extends Component {
 
@@ -15,7 +16,6 @@ componentDidMount() {
     handleKeydown = (e) => {
             if (e.code === "Escape") {
                 this.props.onClose()
-                console.log(e.code)
         }
     }
 
@@ -30,11 +30,15 @@ componentDidMount() {
         return (createPortal
                 (<div className={css.overlay} onClick={this.handleBackdropClick}>
                     <div className={css.modal}>
-                        <img src={this.props.modalImg} alt="BigImage"/>
+                        <img src={this.props.largeImage} alt="BigImage"/>
                     </div>
                 </div>,
                 modalRoot
                 )
                )
             }
-        }
+}
+        
+Modal.propTypes = {
+    largeImage:PropTypes.string.isRequired
+}

@@ -1,4 +1,5 @@
 import css from './ImageGalleryItem.module.css'
+import PropTypes from 'prop-types';
 export const ImageGalleryItem = ({ image, alt, largeImage, handleClick }) => {
   
     return (
@@ -7,3 +8,11 @@ export const ImageGalleryItem = ({ image, alt, largeImage, handleClick }) => {
         </li>
     )
 }
+
+ImageGalleryItem.propTypes = {
+    image:PropTypes.string.isRequired,
+    alt:PropTypes.string.isRequired,
+    largeImage:PropTypes.string.isRequired,
+    handleClick:PropTypes.func.isRequired
+}
+
