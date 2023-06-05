@@ -16,7 +16,7 @@ export class Searchbar extends Component {
     toast.dark("Enter text to search, please!", {
         style:{backgroundColor:'#1b3ff2', fontSize:20}
     });
-  }
+    }
     
     handleChange = (event) => {
         this.setState({query:event.target.value})

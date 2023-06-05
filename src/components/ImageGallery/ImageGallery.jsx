@@ -25,13 +25,12 @@ export class ImageGallery extends Component{
         error:null,
     }
 
-     componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) {
         const { page, query} = this.state
         if (query !== prevState.query || prevState.page !== page) {
             this.setState({ isLoader: true, inactiveButton: true, showButton: page!==1 })
-          this.getImages(query, page)
-  
-        }
+            this.getImages(query, page)
+          }
     }
 
     handleSubmit = (query) => {
@@ -39,9 +38,9 @@ export class ImageGallery extends Component{
             return
         }
     this.setState({ query, page:1, images:[], isEmpty:false, error: null})
-  }
+    }
 
-    handleClick = () => {
+    handleImageClick = () => {
         this.setState((prevState)=>({page: prevState.page+1}))
     }
     
@@ -51,24 +50,21 @@ export class ImageGallery extends Component{
     }
     
     getImages = (query, page) => {
-         setTimeout(()=> {
-                  api.fetchImages(query, page)
-                    .then(response => {
-                       return response.json()
-                    })
-                    .then(({hits, totalHits}) =>
-                    {   if (hits.length === 0) {
-                            this.setState({ isEmpty: true });
-                            return;
-                        }
-                        this.setState((prevState) => ({
-                            images: [...prevState.images, ...hits],
-                            showButton: page < Math.ceil(totalHits / PER_PAGE)
-                        }))
-                    })
-                      .catch((error) => { this.setState({ error })})
-                    .finally(()=>{this.setState({isLoader: false, inactiveButton: false})})
-              }, 2000)  
+         api.fetchImages(query, page)
+         .then(response => { return response.json()})
+         .then(({hits, totalHits}) =>
+            {if (hits.length === 0)
+                {this.setState({ isEmpty: true });
+                return;
+                }
+                this.setState((prevState) =>
+                ({
+                    images: [...prevState.images, ...hits],
+                    showButton: page < Math.ceil(totalHits / PER_PAGE)
+                }))
+            })
+        .catch((error) => { this.setState({ error })})
+        .finally(()=>{this.setState({isLoader: false, inactiveButton: false})})
     }
 
     onClose = () => {
@@ -91,7 +87,7 @@ export class ImageGallery extends Component{
                 {error && <p className={css.infoText}>Oops...<BsFillEmojiFrownFill/> There's been a problem with the server. Please try again later. Have a nice day <BsEmojiWink/></p>}
                 {isEmpty && (<p className={css.infoText}>Sorry. No results were found for your request. Try again.</p>)}
                 {isLoader && <Loader />}
-                {showButton && <Button inactiveButton={inactiveButton} onClick={this.handleClick} />}
+                {showButton && <Button inactiveButton={inactiveButton} onClick={this.handleImageClick} />}
                 {showModal && <Modal largeImage={largeImage} onClose={this.onClose}/>}
             </>
             
